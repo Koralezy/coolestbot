@@ -37,6 +37,26 @@ async def change_status():
 # -------------------- Commands --------------------
 
 
+# -------------------- /help --------------------
+
+@bot.command(description="Shows all the commands")
+async def help(ctx):
+  embed = discord.Embed(title="Commands", description="Hey there! Here are my commands.",
+                        color=0x0400ff)
+  embed.add_field(name="/mute [member] [reason] [duration]", value="Mutes someone for a certain amount of time.", inline=False)
+  embed.add_field(name="/unmute [member] [reason]", value="Unmutes someone.", inline=False)
+  embed.add_field(name="/kick [member] [reason]", value="Kicks someone.", inline=False)
+  embed.add_field(name="/ban [member] [reason]", value="Bans someone.", inline=False)
+  embed.add_field(name="/unban", value="Unbans someone.", inline=False)
+  embed.add_field(name="/purge [amount]", value="Deletes a specified amount of messages.", inline=False)
+  embed.add_field(name="/lockdown", value="Prevents members from talking in channel (All roles with SEND MESSAGES as / or X in the channel will not be able to talk.).", inline=False)
+  embed.add_field(name="/unlock", value="Unlocks channel.", inline=False)
+  embed.add_field(name="/setlogs", value="Set the logs channel.", inline=False)
+  embed.add_field(name="/food", value="Hungry? Grab a bite!", inline=False)
+  embed.add_field(name="/foodsuggest [suggestion]", value="Suggest a food gif to the dev.", inline=False)
+
+  await ctx.respond(embed=embed)
+
 # -------------------- /mute --------------------
 
 @bot.command(description="Mutes someone for a certain amount of time.", pass_context=True)
@@ -114,6 +134,8 @@ async def unmute(ctx, member: Option(discord.Member, description="Who you want t
   except:
     await ctx.respond("I could not unmute this member!")
     return
+  if reason == None:
+    reason="unspecified reason"
   embed = discord.Embed(title="Member Unuted", color=discord.Color.green(), timestamp=datetime.utcnow())
   embed.add_field(name="Member", value=f"{member.mention}", inline=True)
   embed.add_field(name="Moderator", value=f"{ctx.author.mention}", inline=True)
@@ -126,7 +148,7 @@ async def unmute(ctx, member: Option(discord.Member, description="Who you want t
   logs = bot.get_channel(logch)
   await logs.send(content=f"**Member unmuted** in <#{ctx.channel.id}> !", embed=embed)
 
-  await ctx.respond(f"{member.mention} has been unmuted for **{r}.**")
+  await ctx.respond(f"{member.mention} has been unmuted for **{reason}.**")
 
 # -------------------- /kick --------------------
 
@@ -206,6 +228,8 @@ async def unban(ctx, member: Option(discord.Member, description="Who you want to
   except:
     await ctx.respond("I could not unban this member!")
     return
+  if reason == None:
+    reason="unspecified reason"
   embed = discord.Embed(title="Member Unbanned", color=discord.Color.green(), timestamp=datetime.utcnow())
   embed.add_field(name="Member", value=f"{member.mention}", inline=True)
   embed.add_field(name="Moderator", value=f"{ctx.author.mention}", inline=True)
@@ -218,7 +242,7 @@ async def unban(ctx, member: Option(discord.Member, description="Who you want to
   logs = bot.get_channel(logch)
   await logs.send(content=f"**Member unbanned** in <#{ctx.channel.id}> !", embed=embed)
 
-  await ctx.respond(f"{member.mention} has been unbanned for **{r}.**")
+  await ctx.respond(f"{member.mention} has been unbanned for **{reason}.**")
 
 # -------------------- /purge --------------------
 
