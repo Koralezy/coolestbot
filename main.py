@@ -5,9 +5,8 @@ from itertools import cycle
 import threading
 import time
 from datetime import datetime
-from lists import topics, foodgifs, killgifs
+from lists import foodgifs
 import random
-import re
 import json
 #import ffmpeg (for music cmds)
 
@@ -36,6 +35,11 @@ async def change_status():
 
 # -------------------- Commands --------------------
 
+# -------------------- /mute --------------------
+
+# -------------------- /kick --------------------
+
+# -------------------- /ban --------------------
 
 # -------------------- /purge --------------------
 
@@ -84,7 +88,6 @@ async def setlogs(ctx):
 @bot.command(description="Hungry? Grab a bite!")
 async def food(ctx):
   food = random.choice(foodgifs)
-  print(food)
 
   wordlist = ["Bon appetit!", "Itadakimasu!", "Bone apple tea!", "Enjoy the digital meal!", "Yum!", "Tasty!", "Ooh, looks great!", "Here's your food!", "Enjoy your food!"]
   word = random.choice(wordlist)
