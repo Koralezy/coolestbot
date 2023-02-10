@@ -106,6 +106,28 @@ async def mute(ctx, member: Option(discord.Member, description="Who you want to 
 
 # -------------------- /unmute --------------------
 
+@bot.command(description="Unmutes someone.", pass_context=True)
+@has_permissions(moderate_members=True)
+async def unmute(ctx, member: Option(discord.Member, description="Who you want to unmute", required=True), reason: Option(str, required=False)):
+  try:
+    await member.remove_timeout(reason=reason)
+  except:
+    await ctx.respond("I could not unmute this member!")
+    return
+  embed = discord.Embed(title="Member Unuted", color=discord.Color.green(), timestamp=datetime.utcnow())
+  embed.add_field(name="Member", value=f"{member.mention}", inline=True)
+  embed.add_field(name="Moderator", value=f"{ctx.author.mention}", inline=True)
+  embed.add_field(name="Reason", value=f"{reason}", inline=True)
+
+  with open("logs.json", 'r') as f:
+    data = json.load(f)
+  logch = int(data[str(ctx.guild.id)])
+  print(logch)
+  logs = bot.get_channel(logch)
+  await logs.send(content=f"**Member unmuted** in <#{ctx.channel.id}> !", embed=embed)
+
+  await ctx.respond(f"{member.mention} has been unmuted for **{r}.**")
+
 # -------------------- /kick --------------------
 
 @bot.command(description="Kicks someone.", pass_context=True)
@@ -175,6 +197,28 @@ async def ban(ctx, member: Option(discord.Member, description="Who you want to b
   await ctx.respond(f"{member.mention} has been **banned** for `{reason}`!")
 
 # -------------------- /unban --------------------
+
+@bot.command(description="Unmutes someone.", pass_context=True)
+@has_permissions(moderate_members=True)
+async def unban(ctx, member: Option(discord.Member, description="Who you want to unmute", required=True), reason: Option(str, required=False)):
+  try:
+    await member.unban(reason=reason)
+  except:
+    await ctx.respond("I could not unban this member!")
+    return
+  embed = discord.Embed(title="Member Unbanned", color=discord.Color.green(), timestamp=datetime.utcnow())
+  embed.add_field(name="Member", value=f"{member.mention}", inline=True)
+  embed.add_field(name="Moderator", value=f"{ctx.author.mention}", inline=True)
+  embed.add_field(name="Reason", value=f"{reason}", inline=True)
+
+  with open("logs.json", 'r') as f:
+    data = json.load(f)
+  logch = int(data[str(ctx.guild.id)])
+  print(logch)
+  logs = bot.get_channel(logch)
+  await logs.send(content=f"**Member unbanned** in <#{ctx.channel.id}> !", embed=embed)
+
+  await ctx.respond(f"{member.mention} has been unbanned for **{r}.**")
 
 # -------------------- /purge --------------------
 
