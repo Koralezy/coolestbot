@@ -12,7 +12,7 @@ import json
 #import ffmpeg (for music cmds)
 
 bot = discord.Bot(intents=discord.Intents(guilds=True, messages=True, message_content=True, members=True))
-statuslist = cycle(
+# statuslist = cycle(
   ['with Python', 'Absolutely Nothing', 'Fun Yo Mama Jokes', 'with your heart ;)', 'definitely 24/7',
    'with fire', 'God', 'amogus', 'with chainsaws', 'the guitar'])
 
@@ -25,7 +25,8 @@ async def on_ready():
   await testguild.send(f"**Bot online** as of <t:{int(rntime)}>! :D")
   global ragplas
   ragplas = await bot.fetch_user(367436292276879362)
-  change_status.start()
+  await bot.change_presence(activity=discord.Game("/help"))
+  #change_status.start()
 
 
 # -------------------- Changes status --------------------
