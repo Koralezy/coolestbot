@@ -1,4 +1,4 @@
-import discord  # pycord\
+import discord  # pycord
 from discord import Option
 from discord.ext import commands, tasks
 from discord.ext.commands import has_permissions
@@ -6,7 +6,7 @@ from itertools import cycle
 import threading
 import time
 from datetime import datetime, timedelta
-from lists import foodgifs
+from lists import foodgifs, catpics
 import random
 import json
 #import ffmpeg (for music cmds)
@@ -53,6 +53,7 @@ async def help(ctx):
   embed.add_field(name="/unlock", value="Unlocks channel.", inline=False)
   embed.add_field(name="/setlogs", value="Set the logs channel.", inline=False)
   embed.add_field(name="/food", value="Hungry? Grab a bite!", inline=False)
+  embed.add_field(name="/cat", value="Get a cat pic!", inline=False)
   embed.add_field(name="/foodsuggest [suggestion]", value="Suggest a food gif to the dev.", inline=False)
 
   await ctx.respond(embed=embed)
@@ -321,14 +322,29 @@ async def food(ctx):
 
   await ctx.respond(embed=embed)
 
+# -------------------- /cat --------------------
+@bot.command(description="Get a cat pic!")
+async def cat(ctx):
+  gato = random.choice(catpics)
+
+  embed = discord.Embed(title="Cat!", color=discord.Color.purple())
+  embed.set_image(url=gato)
+
+  await ctx.respond(embed=embed)
+
 # -------------------- /suggestfood --------------------
 @bot.command(description="(/food) Suggest a food gif to the dev.")
 async def suggestfood(ctx, suggestion: Option(str, required=True)):
   await ctx.defer()
-  print(f"[/suggest food] Food Gif Suggestion: {suggestion} Suggester: {ctx.author}")
   await ragplas.send(f"*FOOD GIF SUGGESTION* | {ctx.author} gave a food gif suggestion: {suggestion}")
   await ctx.followup.send("We sent your food gif suggestion to the dev!")
 
+# -------------------- /suggestcats --------------------
+@bot.command(description="(/cat) Suggest a cat pic to the dev.")
+async def suggestfood(ctx, suggestion: Option(str, required=True)):
+  await ctx.defer()
+  await ragplas.send(f"*CAT PIC SUGGESTION* | {ctx.author} gave a cat pic suggestion: {suggestion}")
+  await ctx.followup.send("We sent your cat pic suggestion to the dev!")
 
 # -------------------- Anti-raid --------------------
 
