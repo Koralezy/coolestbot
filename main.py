@@ -334,14 +334,14 @@ async def cat(ctx):
   await ctx.respond(embed=embed)
 
 # -------------------- /suggestfood --------------------
-@bot.command(description="(/food) Suggest a food gif to the dev.")
+@bot.command(description="(/food) Suggest a food gif to the developer.")
 async def suggestfood(ctx, suggestion: Option(str, required=True)):
   await ctx.defer()
   await ragplas.send(f"*FOOD GIF SUGGESTION* | {ctx.author} gave a food gif suggestion: {suggestion}")
   await ctx.followup.send("We sent your food gif suggestion to the dev!")
 
 # -------------------- /suggestcats --------------------
-@bot.command(description="(/cat) Suggest a cat pic to the dev.")
+@bot.command(description="(/cat) Suggest a cat pic to the developer.")
 async def suggestfood(ctx, suggestion: Option(str, required=True)):
   await ctx.defer()
   await ragplas.send(f"*CAT PIC SUGGESTION* | {ctx.author} gave a cat pic suggestion: {suggestion}")
