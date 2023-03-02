@@ -52,7 +52,8 @@ async def help(ctx):
   embed.add_field(name="/setlogs", value="Set the logs channel.", inline=False)
   embed.add_field(name="/food", value="Hungry? Grab a bite!", inline=False)
   embed.add_field(name="/cat", value="Get a cat pic!", inline=False)
-  embed.add_field(name="/foodsuggest [suggestion]", value="Suggest a food gif to the dev.", inline=False)
+  embed.add_field(name="/suggestfood [suggestion]", value="Suggest a food gif to the dev.", inline=False)
+  embed.add_field(name="/suggestcat [suggestion]", value="Suggest a cat pic to the dev.", inline=False)
 
   await ctx.respond(embed=embed)
 
@@ -339,7 +340,7 @@ async def suggestfood(ctx, suggestion: Option(str, required=True)):
 
 # -------------------- /suggestcats --------------------
 @bot.command(description="(/cat) Suggest a cat pic to the developer.")
-async def suggestfood(ctx, suggestion: Option(str, required=True)):
+async def suggestcat(ctx, suggestion: Option(str, required=True)):
   await ctx.defer()
   await ragplas.send(f"*CAT PIC SUGGESTION* | {ctx.author} gave a cat pic suggestion: {suggestion}")
   await ctx.followup.send("We sent your cat pic suggestion to the dev!")
