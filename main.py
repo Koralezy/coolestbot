@@ -12,9 +12,6 @@ import json
 #import ffmpeg (for music cmds)
 
 bot = discord.Bot(intents=discord.Intents(guilds=True, messages=True, message_content=True, members=True))
-# statuslist = cycle(
-  ['with Python', 'Absolutely Nothing', 'Fun Yo Mama Jokes', 'with your heart ;)', 'definitely 24/7',
-   'with fire', 'God', 'amogus', 'with chainsaws', 'the guitar'])
 
 
 @bot.event
