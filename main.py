@@ -9,6 +9,8 @@ from datetime import datetime, timedelta
 from lists import foodgifs, catpics
 import random
 import json
+from dotenv import load_dotenv
+import os
 #import ffmpeg (for music cmds)
 
 bot = discord.Bot(intents=discord.Intents(guilds=True, messages=True, message_content=True, members=True))
@@ -488,4 +490,5 @@ async def everyoneraid(message):
       everyonepings = everyonepings + 1
       print("[Antiraid | @everyone] everyonepings:", everyonepings)  
 
-bot.run("OTc1ODM4NzkyODAxOTkyNzA0.GDDcPL.i-WMsXYJii6kx7iuU-Jn-d7t2z57boe_nsjTR8")    
+load_dotenv()
+bot.run(os.environ["token"])    
