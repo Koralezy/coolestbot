@@ -338,14 +338,14 @@ async def cat(ctx):
 async def suggestfood(ctx, suggestion: Option(str, required=True)):
   await ctx.defer()
   await ragplas.send(f"*FOOD GIF SUGGESTION* | {ctx.author} gave a food gif suggestion: {suggestion}")
-  await ctx.followup.send("We sent your food gif suggestion to the dev!")
+  await ctx.send_followup("We sent your food gif suggestion to the dev!")
 
 # -------------------- /suggestcats --------------------
 @bot.command(description="(/cat) Suggest a cat pic to the developer.")
 async def suggestcat(ctx, suggestion: Option(str, required=True)):
   await ctx.defer()
   await ragplas.send(f"*CAT PIC SUGGESTION* | {ctx.author} gave a cat pic suggestion: {suggestion}")
-  await ctx.followup.send("We sent your cat pic suggestion to the dev!")
+  await ctx.send_followup("We sent your cat pic suggestion to the dev!")
 
 # -------------------- Anti-raid --------------------
 
